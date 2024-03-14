@@ -9,8 +9,44 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Wather station project 
+## Weather station project 
 
+```{r initialisation}
+install.packages("here")
+install.packages("tidyverse")
+install.packages("gganimate")
+install.packages("gifski")
+install.packages("av")
+
+library(here)
+library(tidyverse)
+library(gganimate)
+library(gifski)
+library(av)
+```
+## Get the data
+```{r getdata}
+
+source = here("rawdata", "sheffielddata.txt")
+
+#df <-  read.csv(source, sep='\t', skip = 7) 
+
+df <- readLines(source)
+
+df <- (gsub("Provisional" , "", df))
+df <- (gsub("\\*" , "", df))
+df <- (gsub("\\#" , "", df))
+
+writeLines(df, here("rawdata", "modified.txt"))
+
+df <-  read.table(here("rawdata" , "modified.txt" ), skip=7 , fill=TRUE)
+```
+
+```{r}
+
+
+
+```
 ```{r cars}
 summary(cars)
 ```
